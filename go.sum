@@ -1,0 +1,6 @@
+github.com/DusanKasan/parsemail v1.2.0 h1:CrzTL1nuPLxB41aO4zE/Tzc9GVD8jjifUftlbTKQQl4=
+github.com/DusanKasan/parsemail v1.2.0/go.mod h1:B9lfMbpVe4DMqPImAOCGti7KEwasnRTrKKn66iQefVs=
+github.com/laochailan/notmuch-go v0.0.0-20180501081624-bcfc52d85e0b h1:TdMFVUzMLjAE1QLAZT7X0Ik7G8/JCodhj7o+PRkKdrA=
+github.com/laochailan/notmuch-go v0.0.0-20180501081624-bcfc52d85e0b/go.mod h1:pfkpqWhEH2gGxBzKnqvNmhGLeeOUDhlzCtAqVGZNJ4I=
+github.com/zenhack/go.notmuch v0.0.0-20220918173508-0c918632c39e h1:tLg1J7U+wz272xShEMy5Sh++m+GeCkNOhzOTCtqba0c=
+github.com/zenhack/go.notmuch v0.0.0-20220918173508-0c918632c39e/go.mod h1:zJtFvR3NinVdmBiLyB4MyXKmqyVfZEb2cK97ISfTgV8=
