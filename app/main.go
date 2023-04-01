@@ -1,25 +1,37 @@
 package main
 
 import (
+	"embed"
 	"log"
+	"net/http"
 	"os"
 
-	email "com.jamesdury.emailfiles/pkg/notmuch"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/template/html"
+
+	routes "com.jamesdury.emailfiles/app/routes"
+	email "com.jamesdury.emailfiles/pkg/notmuch"
 	notmuch "github.com/zenhack/go.notmuch"
 )
 
+//go:embed template/*
+var embedDirTemplate embed.FS
+
 func main() {
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		Views: html.NewFileSystem(http.FS(embedDirTemplate), ".html"),
+	})
 
 	db := getDB()
 
-	repo := email.NewRepo(db)
-	service := email.NewService(repo)
-	service.FetchEmail("tag:attachment")
+	emailRepo := email.NewRepo(db)
+	emailService := email.NewService(emailRepo)
+
+	home := app.Group("/")
+
+	routes.HomeRouter(home, emailService)
 
 	defer db.Close()
-
 	log.Fatal(app.Listen(":8080"))
 }
 

@@ -20,14 +20,17 @@ func NewRepo(db *notmuch.DB) Repository {
 }
 
 func (r *repository) Fetch(query string) (*notmuch.Messages, error) {
-	msgs, err := r.connection.NewQuery(query).Messages()
+	q := r.connection.NewQuery(query)
+	q.AddTagExclude("spam")
+	q.SetSortScheme(notmuch.SORT_NEWEST_FIRST)
+	msgs, err := q.Messages()
+
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(msgs)
 	msg := &notmuch.Message{}
 	for msgs.Next(&msg) {
-		fmt.Println(msg.Filename())
+		fmt.Println(msg.Date(), msg.Filename())
 	}
 
 	return msgs, nil
