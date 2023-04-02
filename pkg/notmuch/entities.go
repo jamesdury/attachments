@@ -12,5 +12,6 @@ type Email struct {
 	From       string
 	Subject    string
 	Suspicious bool
+	ThreadId   string
 	To         string
 }

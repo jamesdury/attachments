@@ -4,16 +4,8 @@ import (
 	"testing"
 )
 
-type aMock struct {
-	test string
-}
+type aMock struct{}
 
-func newAMock() Repository {
-	return &aMock{
-		test: "",
-	}
-
-}
 func (s *aMock) Fetch(query string) ([]Email, error) {
 	var emails []Email
 	e := Email{
@@ -28,10 +20,11 @@ func (s *aMock) Fetch(query string) ([]Email, error) {
 }
 
 func TestFetchEmail(t *testing.T) {
-	m := newAMock()
+
+	mm := Repository(&aMock{})
 
 	var testFilename = "image.jpg"
-	response, _ := NewService(m).FetchEmail(testFilename)
+	response, _ := NewService(mm).FetchEmail(testFilename)
 
 	if response[0].Filename != testFilename {
 		t.Fatalf("Service is not calling repository.Fetch()")
