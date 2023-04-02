@@ -11,6 +11,7 @@ import (
 type Repository interface {
 	Fetch(query string) ([]Email, error)
 }
+
 type repository struct {
 	connection *notmuch.DB
 }

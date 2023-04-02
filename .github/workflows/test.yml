@@ -1,0 +1,23 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.20.x
+
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: libnotmuch-dev
+        version: 1.0
+
+    - name: Download
+      run: go mod download
+
+    - name: Test
+      run: go test -v ./...
