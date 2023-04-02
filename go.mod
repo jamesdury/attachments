@@ -1,4 +1,4 @@
-module com.jamesdury.emailfiles
+module github.com/jamesdury/attachments
 
 go 1.20
 

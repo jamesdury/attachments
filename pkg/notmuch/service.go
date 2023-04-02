@@ -1,11 +1,7 @@
 package email
 
-import (
-	notmuch "github.com/zenhack/go.notmuch"
-)
-
 type Service interface {
-	FetchEmail(query string) (*notmuch.Messages, error)
+	FetchEmail(query string) ([]Email, error)
 }
 
 type service struct {
@@ -18,6 +14,6 @@ func NewService(r Repository) Service {
 	}
 }
 
-func (s *service) FetchEmail(query string) (*notmuch.Messages, error) {
+func (s *service) FetchEmail(query string) ([]Email, error) {
 	return s.repository.Fetch(query)
 }

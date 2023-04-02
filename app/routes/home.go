@@ -1,10 +1,10 @@
 package routes
 
 import (
-	email "com.jamesdury.emailfiles/pkg/notmuch"
 	"github.com/gofiber/fiber/v2"
+	email "github.com/jamesdury/attachments/pkg/notmuch"
 
-	handlers "com.jamesdury.emailfiles/app/handlers"
+	handlers "github.com/jamesdury/attachments/app/handlers"
 )
 
 func HomeRouter(app fiber.Router, service email.Service) {

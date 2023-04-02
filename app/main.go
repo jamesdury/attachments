@@ -9,12 +9,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
 
-	routes "com.jamesdury.emailfiles/app/routes"
-	email "com.jamesdury.emailfiles/pkg/notmuch"
+	routes "github.com/jamesdury/attachments/app/routes"
+	email "github.com/jamesdury/attachments/pkg/notmuch"
 	notmuch "github.com/zenhack/go.notmuch"
 )
 
-//go:embed template/*
+//go:embed static/template/*
 var embedDirTemplate embed.FS
 
 func main() {
