@@ -1,0 +1,14 @@
+$font-stack: Helvetica, sans-serif;
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+  Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+$primary-color: #fff;
+$persian-blue: #072ac8ff;
+$tea-rose-red: #ffd6d7ff;
+$dark-spring-green: #0c7c59ff;
+$dim-gray: #747274ff;
+
+@import "./reset";
+@import "./base";
+@import "./list";
+@import "./filter";

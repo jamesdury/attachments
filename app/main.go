@@ -7,9 +7,10 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/template/html"
 
-	routes "github.com/jamesdury/attachments/app/routes"
+	home "github.com/jamesdury/attachments/app/home"
 	email "github.com/jamesdury/attachments/pkg/notmuch"
 	notmuch "github.com/zenhack/go.notmuch"
 )
@@ -17,19 +18,25 @@ import (
 //go:embed static/template/*
 var embedDirTemplate embed.FS
 
+//go:embed static/dist/*
+var embedDirStatic embed.FS
+
 func main() {
 	app := fiber.New(fiber.Config{
 		Views: html.NewFileSystem(http.FS(embedDirTemplate), ".html"),
 	})
 
+	app.Use("/static", filesystem.New(filesystem.Config{
+		Browse:     true,
+		Root:       http.FS(embedDirStatic),
+		PathPrefix: "static/dist",
+	}))
+
 	db := getDB()
 
-	emailRepo := email.NewRepo(db)
-	emailService := email.NewService(emailRepo)
+	emailService := email.NewService(email.NewRepo(db))
 
-	home := app.Group("/")
-
-	routes.HomeRouter(home, emailService)
+	home.Router(app.Group("/"), emailService)
 
 	defer db.Close()
 	log.Fatal(app.Listen(":8080"))

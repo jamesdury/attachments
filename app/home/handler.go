@@ -1,4 +1,4 @@
-package handlers
+package home
 
 import (
 	"sort"
@@ -33,7 +33,7 @@ func getTopContacts(emails []email.Email) []email.Email {
 	return newEmails
 }
 
-func GetEmails(service email.Service) fiber.Handler {
+func GetAttachments(service email.Service) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		emails, err := service.FetchEmail("attachment:* and date:3months..today")
 

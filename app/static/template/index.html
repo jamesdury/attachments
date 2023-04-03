@@ -1,90 +1,33 @@
 <html>
   <head>
-    <style>
-      body {
-        background-color: #efefef;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-      }
-
-      .container {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-      }
-      .grid-container {
-        display: grid;
-        grid-template-columns: 300px 300px 300px;
-        grid-gap: 10px;
-        padding: 10px;
-      }
-
-      .grid-container > div {
-        background-color: rgba(255, 255, 255, 0.8);
-        text-align: center;
-        padding: 20px;
-        border-radius: 5px;
-      }
-
-      .attachment {
-        height: 200px;
-        background: #efefef;
-        border-radius: 5px;
-      }
-
-      .container-top {
-        display: flex;
-        width: 100%;
-        justify-content: space-around;
-      }
-      .top {
-        background: lightblue;
-        border-radius: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 100px;
-        height: 100px;
-      }
-
-      .top span {
-        display: none;
-        word-wrap: break-word;
-      }
-    </style>
+    <title>Attachments</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
   </head>
   <body>
-    <div class="container">
       <h1>{{ .Title }}</h1>
 
       <!-- TODO move to another partial -->
       <!-- TODO make this show and hide -->
       <h2>Top Contacts</h2>
       <div
-        class="container-top"
+        class="filter"
         aria-label="Top Contacts"
         aria-description="A list of the top contacts with attachments">
         {{ range .Top }}
-        <div class="top">
           <span aria-description="Top contact {{.From}}">{{ .From }}</span>
-        </div>
         {{ end }}
       </div>
       <h2>Everything</h2>
-      <div class="grid-container">
+
+      <div class="email-list">
         {{ range .Emails }}
-        <div>
-          <div class="attachment">
-            <a href="/{{ .ThreadId }}/{{ .Filename }}">{{ .Filename }}</a>
-          </div>
+        <div class="email-list__item">
+            <a class="email-list__item-link" href="/{{ .ThreadId }}/{{ .Filename }}">{{ .Filename }}</a>
 
           <span>{{ .Filename }}</span><br />
           <span>{{ .Subject }}</span>
         </div>
-
         {{ end }}
       </div>
-    </div>
   </body>
 </html>

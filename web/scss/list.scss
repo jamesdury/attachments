@@ -1,0 +1,20 @@
+.email-list {
+  display: grid;
+  grid-template-columns: 20rem 20rem 20rem 20rem;
+  grid-gap: 1rem;
+}
+
+.email-list__item {
+  padding: 1rem;
+  background: #efefef;
+  border-radius: 0.5rem;
+}
+
+.email-list__item-link {
+  align-items: center;
+  background: #fff;
+  color: black;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+}
