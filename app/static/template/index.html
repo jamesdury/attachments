@@ -4,30 +4,30 @@
     <link rel="stylesheet" type="text/css" href="/static/styles.css" />
   </head>
   <body>
-      <h1>{{ .Title }}</h1>
+    <h1>{{ .Title }}</h1>
 
-      <!-- TODO move to another partial -->
-      <!-- TODO make this show and hide -->
-      <h2>Top Contacts</h2>
-      <div
-        class="filter"
-        aria-label="Top Contacts"
-        aria-description="A list of the top contacts with attachments">
-        {{ range .Top }}
-          <span aria-description="Top contact {{.From}}">{{ .From }}</span>
-        {{ end }}
+    <!-- TODO move to another partial -->
+    <!-- TODO make this show and hide -->
+
+    {{template "static/template/filter" . }}
+
+    <h2>Everything</h2>
+
+    <div class="email-list">
+      {{ range .Emails }}
+      <div class="email-list__item">
+        <a
+          class="email-list__item-link"
+          href="/{{ .ThreadId }}/{{ .Filename }}"
+        >
+          {{ .Filename }}
+        </a>
+
+        <span>{{ .Filename }}</span><br />
+        <span>{{ .ContentType | filetype }}</span><br />
+        <span>{{ truncate .Subject 50 }}</span>
       </div>
-      <h2>Everything</h2>
-
-      <div class="email-list">
-        {{ range .Emails }}
-        <div class="email-list__item">
-            <a class="email-list__item-link" href="/{{ .ThreadId }}/{{ .Filename }}">{{ .Filename }}</a>
-
-          <span>{{ .Filename }}</span><br />
-          <span>{{ .Subject }}</span>
-        </div>
-        {{ end }}
-      </div>
+      {{ end }}
+    </div>
   </body>
 </html>

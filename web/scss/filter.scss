@@ -1,3 +1,56 @@
 .filter {
+  display: none;
+  padding: 1rem;
+}
+
+label.filter-button {
+  cursor: pointer;
+}
+
+input[type="checkbox"].filter-checkbox {
+  display: none;
+}
+
+input[type="checkbox"].filter-checkbox:checked ~ label.filter-button {
+  display: none;
+}
+
+input[type="checkbox"].filter-checkbox:checked ~ .filter {
+  display: block;
+}
+
+input[type="radio"].filter-contact {
+  display: none;
+}
+
+.filter-top-contacts {
   display: flex;
+  text-align: center;
+}
+
+.filter-contact__label {
+  align-items: center;
+  border-radius: 5rem;
+  cursor: pointer;
+  display: flex;
+  height: 10rem;
+  justify-content: center;
+  width: 10rem;
+}
+
+.filter-contact__label:hover {
+  background: #efefef;
+}
+.filter-contact__label img {
+  border-radius: 5rem;
+  pointer-events: none;
+}
+
+input[type="radio"].filter-contact:checked ~ .filter-contact__label {
+  background: #efefef;
+}
+
+button {
+  padding: 1rem;
+  background: #efefef;
 }

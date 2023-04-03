@@ -6,9 +6,8 @@ import (
 	email "github.com/jamesdury/attachments/pkg/notmuch"
 )
 
-func TestGetTopContacts(t *testing.T) {
+func getMockEmails() []email.Email {
 	var emails []email.Email
-
 	emails = append(emails, email.Email{From: "a"})
 	emails = append(emails, email.Email{From: "a"})
 	emails = append(emails, email.Email{From: "a"})
@@ -25,12 +24,24 @@ func TestGetTopContacts(t *testing.T) {
 	emails = append(emails, email.Email{From: "g"})
 	emails = append(emails, email.Email{From: "j"})
 
-	top := getTopContacts(emails)
+	return emails
+}
+
+func TestGetTopContacts(t *testing.T) {
+	top := getTopContacts(getMockEmails())
 
 	if top[0].From != "j" {
 		t.Fatalf("Emails are not being sorted")
 	}
 	if top[1].From != "a" {
 		t.Fatalf("Emails are not being sorted")
+	}
+}
+
+func TestGetTopContactsLength(t *testing.T) {
+	top := getTopContacts(getMockEmails())
+
+	if len(top) != 5 {
+		t.Fatalf("Top Contacts email length is incorrect, should be 5, currently %v", len(top))
 	}
 }

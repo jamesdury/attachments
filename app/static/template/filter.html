@@ -1,0 +1,37 @@
+<h2>Top Contacts</h2>
+
+<input
+  type="checkbox"
+  id="reveal-filter"
+  class="filter-checkbox"
+  role="button"
+/>
+<label for="reveal-filter" class="filter-button">Filter</label>
+<div
+  class="filter"
+  aria-label="Top Contacts"
+  aria-description="A list of the top contacts with attachments"
+>
+  <label for="reveal-filter" class="filter-button">Close</label>
+
+  <form action="/" method="GET">
+    <div class="filter-top-contacts">
+      {{ range .Top }}
+      <div>
+        <input
+          class="filter-contact"
+          id="{{ .From }}"
+          name="from"
+          type="radio"
+          value="{{ .From | email }}"
+        />
+        <label class="filter-contact__label" for="{{ .From }}">
+          <img src="{{ .From | email | gravatar }}" alt="{{ .From | email }}" />
+        </label>
+        {{ truncate (.From | contact) 15 }}
+      </div>
+      {{ end }}
+    </div>
+    <button>submit</button>
+  </form>
+</div>

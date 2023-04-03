@@ -60,12 +60,13 @@ func (r *repository) Fetch(query string) ([]Email, error) {
 				 * a.ContentType === http.DetectContentType
 				 */
 				e := Email{
-					Filename: a.Filename,
-					Date:     msg.Date(),
-					Data:     a.Data,
-					Subject:  email.Subject,
-					ThreadId: msg.ThreadID(),
-					From:     msg.Header("From"),
+					Filename:    a.Filename,
+					Date:        msg.Date(),
+					Data:        a.Data,
+					Subject:     email.Subject,
+					ThreadId:    msg.ThreadID(),
+					From:        msg.Header("From"),
+					ContentType: a.ContentType,
 				}
 
 				emails = append(emails, e)

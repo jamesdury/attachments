@@ -10,9 +10,11 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/template/html"
 
-	home "github.com/jamesdury/attachments/app/home"
-	email "github.com/jamesdury/attachments/pkg/notmuch"
 	notmuch "github.com/zenhack/go.notmuch"
+
+	home "github.com/jamesdury/attachments/app/home"
+
+	email "github.com/jamesdury/attachments/pkg/notmuch"
 )
 
 //go:embed static/template/*
@@ -22,8 +24,15 @@ var embedDirTemplate embed.FS
 var embedDirStatic embed.FS
 
 func main() {
+	engine := html.NewFileSystem(http.FS(embedDirTemplate), ".html")
+	engine.AddFunc("filetype", TemplateFunctionFileType)
+	engine.AddFunc("truncate", TemplateFunctionTruncate)
+	engine.AddFunc("contact", TemplateFunctionContact)
+	engine.AddFunc("email", TemplateFunctionEmail)
+	engine.AddFunc("gravatar", TemplateFunctionGravatar)
+
 	app := fiber.New(fiber.Config{
-		Views: html.NewFileSystem(http.FS(embedDirTemplate), ".html"),
+		Views: engine,
 	})
 
 	app.Use("/static", filesystem.New(filesystem.Config{
