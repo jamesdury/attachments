@@ -2,6 +2,8 @@ package email
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 type aMock struct{}
@@ -21,12 +23,10 @@ func (s *aMock) Fetch(query string) ([]Email, error) {
 
 func TestFetchEmail(t *testing.T) {
 
+	testFilename := "image.jpg"
 	mm := Repository(&aMock{})
 
-	var testFilename = "image.jpg"
 	response, _ := NewService(mm).FetchEmail(testFilename)
 
-	if response[0].Filename != testFilename {
-		t.Fatalf("Service is not calling repository.Fetch()")
-	}
+	assert.Equal(t, testFilename, response[0].Filename)
 }

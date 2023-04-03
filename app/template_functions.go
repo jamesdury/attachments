@@ -1,12 +1,12 @@
 package main
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"regexp"
 	"strings"
 	"time"
-
-	"github.com/revidian-cloud/go-gravatar/gravatar"
 )
 
 func TemplateFunctionFileType(s string) string {
@@ -36,27 +36,35 @@ func TemplateFunctionTruncate(s string, l int) string {
 
 func TemplateFunctionContact(s string) string {
 	re := regexp.MustCompile(`(.*?)\ <`)
+
+	m := re.FindStringSubmatch(s)
+	if len(m) == 0 {
+		return s
+	}
+
 	// TODO this needs some checks
-	return strings.Trim(re.FindStringSubmatch(s)[1], "\"")
+	return strings.Trim(m[1], "\"")
 }
 
 func TemplateFunctionEmail(s string) string {
 	re := regexp.MustCompile(`<(.*)>`)
-	return re.FindStringSubmatch(s)[1]
+
+	m := re.FindStringSubmatch(s)
+	if len(m) == 0 {
+		return s
+	}
+
+	return m[1]
 }
 
 func TemplateFunctionGravatar(s string) string {
-	img, err := gravatar.NewImage(s)
-	if err != nil {
-		panic(err)
-	}
+	email := strings.TrimSpace(s)
+	email = strings.ToLower(email)
 
-	imgURL, err := img.URL()
-	if err != nil {
-		panic(err)
-	}
+	hash := md5.Sum([]byte(email))
+	v := hex.EncodeToString(hash[:])
 
-	return imgURL.String()
+	return fmt.Sprintf("https://www.gravatar.com/avatar/%s.jpg", v)
 }
 
 func TemplateFunctionPrettyDate(t time.Time) string {
