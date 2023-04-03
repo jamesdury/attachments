@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestFileType(t *testing.T) {
 	ft := TemplateFunctionFileType("application/pdf")
@@ -11,7 +14,10 @@ func TestFileType(t *testing.T) {
 }
 
 func TestTruncate(t *testing.T) {
-	s := TemplateFunctionTruncate("The quick brown fox jumps over the lazy dog", 12)
+	s := TemplateFunctionTruncate(
+		"The quick brown fox jumps over the lazy dog",
+		12,
+	)
 
 	if s != "The quick br" {
 		t.Fatalf("word not truncated, found: %s", s)
@@ -40,5 +46,21 @@ func TestGravatar(t *testing.T) {
 
 	if s != expected {
 		t.Fatalf("file type not detected for pdf, found: %s", s)
+	}
+}
+
+func TestPrettyDate(t *testing.T) {
+	const YYYYMMDD = "2006-01-02"
+
+	d, _ := time.Parse(YYYYMMDD, "2023-01-04")
+	s := TemplateFunctionPrettyDate(d)
+	expected := "Jan 04"
+
+	if s != expected {
+		t.Fatalf(
+			"Pretty date not parsing correctly, expected: %s, received:  %s",
+			expected,
+			s,
+		)
 	}
 }

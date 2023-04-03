@@ -30,6 +30,7 @@ func main() {
 	engine.AddFunc("contact", TemplateFunctionContact)
 	engine.AddFunc("email", TemplateFunctionEmail)
 	engine.AddFunc("gravatar", TemplateFunctionGravatar)
+	engine.AddFunc("prettydate", TemplateFunctionPrettyDate)
 
 	app := fiber.New(fiber.Config{
 		Views: engine,

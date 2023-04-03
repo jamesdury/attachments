@@ -18,9 +18,9 @@
           <span class="fiv-sqo fiv-icon-{{ .ContentType | filetype }}"></span>
           &nbsp;
         </a>
-
         <span>{{ truncate .Subject 50 }}</span><br/><br/>
-        <em>{{ .Filename }}</em>
+        <small>{{ .Filename }}</small><br/>
+        <small>{{ .Received | prettydate }}</small>
       </div>
       {{ end }}
     </div>

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/revidian-cloud/go-gravatar/gravatar"
 )
@@ -56,4 +57,8 @@ func TemplateFunctionGravatar(s string) string {
 	}
 
 	return imgURL.String()
+}
+
+func TemplateFunctionPrettyDate(t time.Time) string {
+	return t.Format("Jan 02")
 }

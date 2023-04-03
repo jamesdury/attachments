@@ -6,13 +6,15 @@ import (
 )
 
 type Email struct {
+	ContentType string
 	Data        io.Reader
-	Date        time.Time
 	Filename    string
+	Filesize    int
 	From        string
+	Received    time.Time
+	Size        int
 	Subject     string
 	Suspicious  bool
 	ThreadId    string
 	To          string
-	ContentType string
 }

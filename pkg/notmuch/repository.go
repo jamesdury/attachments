@@ -2,6 +2,10 @@ package email
 
 import (
 	"bufio"
+	"encoding/base64"
+	"io/ioutil"
+
+	//"net/http"
 	"os"
 
 	"github.com/DusanKasan/parsemail"
@@ -38,6 +42,37 @@ func readEmail(name string) (parsemail.Email, error) {
 	return email, nil
 }
 
+// https://stackoverflow.com/a/56141678
+func Filesize(s string) int {
+	l := len(s)
+
+	// count how many trailing '=' there are (if any)
+	eq := 0
+	if l >= 2 {
+		if s[l-1] == '=' {
+			eq++
+		}
+		if s[l-2] == '=' {
+			eq++
+		}
+
+		l -= eq
+	}
+
+	// basically:
+	//
+	// eq == 0 :    bits-wasted = 0
+	// eq == 1 :    bits-wasted = 2
+	// eq == 2 :    bits-wasted = 4
+
+	// each base64 character = 6 bits
+
+	// so orig length ==  (l*6 - eq*2) / 8
+
+	return (l*3 - eq) / 4
+
+}
+
 func (r *repository) Fetch(query string) ([]Email, error) {
 	q := r.connection.NewQuery(query)
 	q.AddTagExclude("spam")
@@ -55,18 +90,28 @@ func (r *repository) Fetch(query string) ([]Email, error) {
 		if err == nil {
 			for _, a := range email.Attachments {
 
+				bytes, err := ioutil.ReadAll(a.Data)
+				if err != nil {
+					panic(err)
+				}
+
+				// TODO Determine the content type of the image file
+				// mimeType := http.DetectContentType(bytes)
+				b64 := base64.StdEncoding.EncodeToString(bytes)
+
 				/*
 				 * TODO write a check somewhere to check filetypes are match
 				 * a.ContentType === http.DetectContentType
 				 */
 				e := Email{
-					Filename:    a.Filename,
-					Date:        msg.Date(),
+					ContentType: a.ContentType,
 					Data:        a.Data,
+					Filename:    a.Filename,
+					From:        msg.Header("From"),
+					Received:    msg.Date(),
+					Size:        Filesize(b64),
 					Subject:     email.Subject,
 					ThreadId:    msg.ThreadID(),
-					From:        msg.Header("From"),
-					ContentType: a.ContentType,
 				}
 
 				emails = append(emails, e)
