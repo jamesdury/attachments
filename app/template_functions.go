@@ -10,15 +10,20 @@ import (
 
 func TemplateFunctionFileType(s string) string {
 	m := map[string]string{
-		"application/pdf": "pdf",
-		"application/ics": "ics",
-		"image/jpeg":      "jpg",
-		"image/png":       "png",
+		"application/ics":              "ics",
+		"application/msword":           "docx",
+		"application/pdf":              "pdf",
+		"application/x-zip-compressed": "zip",
+		"image/jpeg":                   "jpg",
+		"image/png":                    "png",
+		"text/calendar":                "ics",
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":       "xlsx",
+		"application/vnd.openxmlformats-officedocument.wordprocessingml.document": "docx",
 	}
 	value, exists := m[s]
 
 	if exists == false {
-		return "unsupported"
+		return "blank"
 	}
 
 	return value

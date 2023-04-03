@@ -4,15 +4,10 @@
     <link rel="stylesheet" type="text/css" href="/static/styles.css" />
   </head>
   <body>
-    <h1>{{ .Title }}</h1>
 
-    <!-- TODO move to another partial -->
-    <!-- TODO make this show and hide -->
-
+    <section>
     {{template "static/template/filter" . }}
-
     <h2>Everything</h2>
-
     <div class="email-list">
       {{ range .Emails }}
       <div class="email-list__item">
@@ -20,14 +15,15 @@
           class="email-list__item-link"
           href="/{{ .ThreadId }}/{{ .Filename }}"
         >
-          {{ .Filename }}
+          <span class="fiv-sqo fiv-icon-{{ .ContentType | filetype }}"></span>
+          &nbsp;
         </a>
 
-        <span>{{ .Filename }}</span><br />
-        <span>{{ .ContentType | filetype }}</span><br />
-        <span>{{ truncate .Subject 50 }}</span>
+        <span>{{ truncate .Subject 50 }}</span><br/><br/>
+        <em>{{ .Filename }}</em>
       </div>
       {{ end }}
     </div>
+    </section>
   </body>
 </html>

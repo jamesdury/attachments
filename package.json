@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "icons": "cp -r node_modules/file-icon-vectors/dist/icons app/static/dist/",
     "build": "sass web/scss/index.scss > app/static/dist/styles.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "file-icon-vectors": "^1.0.0",
     "sass": "^1.60.0"
   }
 }
