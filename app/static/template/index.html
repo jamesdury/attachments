@@ -31,11 +31,47 @@
         background: #efefef;
         border-radius: 5px;
       }
+
+      .container-top {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+      }
+      .top {
+        background: lightblue;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100px;
+        height: 100px;
+      }
+
+      .top span {
+        display: none;
+        word-wrap: break-word;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>{{ .Title }}</h1>
+
+      <!-- TODO move to another partial -->
+      <!-- TODO make this show and hide -->
+      <h2>Top Contacts</h2>
+      <div
+        class="container-top"
+        aria-label="Top Contacts"
+        aria-description="A list of the top contacts with attachments">
+        {{ range .Top }}
+        <div class="top">
+          <span aria-description="Top contact {{.From}}">{{ .From }}</span>
+        </div>
+        {{ end }}
+      </div>
+      <h2>Everything</h2>
       <div class="grid-container">
         {{ range .Emails }}
         <div>

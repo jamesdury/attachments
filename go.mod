@@ -7,6 +7,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.43.0
 	github.com/laochailan/notmuch-go v0.0.0-20180501081624-bcfc52d85e0b
 	github.com/zenhack/go.notmuch v0.0.0-20220918173508-0c918632c39e
+	golang.org/x/exp v0.0.0-20230321023759-10a507213a29
 )
 
 require (

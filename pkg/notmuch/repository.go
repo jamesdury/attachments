@@ -65,6 +65,7 @@ func (r *repository) Fetch(query string) ([]Email, error) {
 					Data:     a.Data,
 					Subject:  email.Subject,
 					ThreadId: msg.ThreadID(),
+					From:     msg.Header("From"),
 				}
 
 				emails = append(emails, e)
