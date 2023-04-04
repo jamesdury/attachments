@@ -8,7 +8,7 @@ import (
 
 type aMock struct{}
 
-func (s *aMock) Fetch(query string) ([]Email, error) {
+func (s *aMock) Query(query string) (*[]Email, error) {
 	var emails []Email
 	e := Email{
 		// pass the query string back to the test so that we can also determine
@@ -18,15 +18,15 @@ func (s *aMock) Fetch(query string) ([]Email, error) {
 
 	emails = append(emails, e)
 
-	return emails, nil
+	return &emails, nil
 }
 
 func TestFetchEmail(t *testing.T) {
-
 	testFilename := "image.jpg"
 	mm := Repository(&aMock{})
 
-	response, _ := NewService(mm).FetchEmail(testFilename)
+	r, err := NewService(mm).Query(testFilename)
 
-	assert.Equal(t, testFilename, response[0].Filename)
+	assert.Equal(t, nil, err)
+	assert.Equal(t, testFilename, (*r)[0].Filename)
 }

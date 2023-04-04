@@ -13,7 +13,7 @@ import (
 )
 
 type Repository interface {
-	Fetch(query string) ([]Email, error)
+	Query(query string) (*[]Email, error)
 }
 
 type repository struct {
@@ -73,7 +73,7 @@ func Filesize(s string) int {
 
 }
 
-func (r *repository) Fetch(query string) ([]Email, error) {
+func (r *repository) Query(query string) (*[]Email, error) {
 	q := r.connection.NewQuery(query)
 	q.AddTagExclude("spam")
 	q.SetSortScheme(notmuch.SORT_NEWEST_FIRST)
@@ -119,5 +119,5 @@ func (r *repository) Fetch(query string) ([]Email, error) {
 		}
 	}
 
-	return emails, nil
+	return &emails, nil
 }

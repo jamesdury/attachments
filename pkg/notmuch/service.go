@@ -1,7 +1,7 @@
 package email
 
 type Service interface {
-	FetchEmail(query string) ([]Email, error)
+	Query(query string) (*[]Email, error)
 }
 
 type service struct {
@@ -14,6 +14,6 @@ func NewService(r Repository) Service {
 	}
 }
 
-func (s *service) FetchEmail(query string) ([]Email, error) {
-	return s.repository.Fetch(query)
+func (s *service) Query(query string) (*[]Email, error) {
+	return s.repository.Query(query)
 }
