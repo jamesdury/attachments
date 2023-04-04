@@ -1,7 +1,9 @@
 package home
 
 import (
+	"fmt"
 	"sort"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/exp/slices"
@@ -68,9 +70,14 @@ func groupByDate(emails []email.Email) map[int]DateEmail {
 	return output
 }
 
-func GetAttachments(service email.Service) fiber.Handler {
+func GetAttachments(notmuch email.Service) fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		emails, err := service.Query("attachment:* and date:3months..today")
+		query := strings.Builder{}
+		query.WriteString("3months..today")
+
+		q := fmt.Sprintf("attachment:* and date:%s", query.String())
+
+		emails, err := notmuch.Query(q)
 
 		if err != nil {
 			return c.Render("static/template/error", fiber.Map{

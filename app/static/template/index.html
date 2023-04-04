@@ -6,6 +6,7 @@
   <body>
     <section>
       <h2>Everything</h2>
+      <small>(The last 3 months)</small>
       {{ range .GroupedByDate }}
       <h3>{{ .Date }}</h3>
       <div class="email-list">
@@ -25,5 +26,6 @@
       </div>
       {{ end }}
     </section>
+    <footer />
   </body>
 </html>
