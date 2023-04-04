@@ -3,7 +3,7 @@
 ## Intro
 
 Inspired by
-[hey.com/features/all-files](https://www.hey.com/features/all-files/), "attachments" reads emails from your local [notmuch](https://notmuchmail.org) database and uses a search query to only display emails that includes attachments.
+[hey.com/features/all-files](https://www.hey.com/features/all-files/), "attachments" reads emails from your local [notmuch](https://notmuchmail.org) database and uses a search query to only display emails that include attachments.
 
 The goal of this project is to provide quick access to attachments, with a small amount of filters e.g. "By Date", "By Contact".
 
