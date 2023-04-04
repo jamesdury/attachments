@@ -7,6 +7,8 @@ import (
 	"regexp"
 	"strings"
 	"time"
+
+	bytesize "github.com/inhies/go-bytesize"
 )
 
 func TemplateFunctionFileType(s string) string {
@@ -69,4 +71,9 @@ func TemplateFunctionGravatar(s string) string {
 
 func TemplateFunctionPrettyDate(t time.Time) string {
 	return t.Format("Jan 02 2006")
+}
+
+func TemplateFunctionBytesize(b int) string {
+	bytes := bytesize.New(float64(b))
+	return fmt.Sprintf("%s", bytes)
 }

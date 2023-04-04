@@ -31,6 +31,7 @@ func main() {
 	engine.AddFunc("email", TemplateFunctionEmail)
 	engine.AddFunc("gravatar", TemplateFunctionGravatar)
 	engine.AddFunc("prettydate", TemplateFunctionPrettyDate)
+	engine.AddFunc("bytesize", TemplateFunctionBytesize)
 
 	app := fiber.New(fiber.Config{
 		Views: engine,

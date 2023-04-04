@@ -73,6 +73,7 @@ func Filesize(s string) int {
 
 }
 
+// TODO tidy this function up
 func (r *repository) Query(query string) (*[]Email, error) {
 	q := r.connection.NewQuery(query)
 	q.AddTagExclude("spam")
