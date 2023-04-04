@@ -68,5 +68,5 @@ func TemplateFunctionGravatar(s string) string {
 }
 
 func TemplateFunctionPrettyDate(t time.Time) string {
-	return t.Format("Jan 02")
+	return t.Format("Jan 02 2006")
 }

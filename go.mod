@@ -4,10 +4,12 @@ go 1.20
 
 require (
 	github.com/DusanKasan/parsemail v1.2.0
+	github.com/ahmetalpbalkan/go-linq v3.0.0+incompatible
 	github.com/gofiber/fiber/v2 v2.43.0
 	github.com/gofiber/template v1.8.0
 	github.com/laochailan/notmuch-go v0.0.0-20180501081624-bcfc52d85e0b
 	github.com/revidian-cloud/go-gravatar/gravatar v0.2.0
+	github.com/samber/lo v1.38.1
 	github.com/zenhack/go.notmuch v0.0.0-20220918173508-0c918632c39e
 	golang.org/x/exp v0.0.0-20230321023759-10a507213a29
 )

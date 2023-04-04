@@ -37,5 +37,5 @@ func TestPrettyDate(t *testing.T) {
 	const YYYYMMDD = "2006-01-02"
 	d, _ := time.Parse(YYYYMMDD, "2023-01-04")
 
-	assert.Equal(t, "Jan 04", TemplateFunctionPrettyDate(d))
+	assert.Equal(t, "Jan 04 2023", TemplateFunctionPrettyDate(d))
 }

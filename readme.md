@@ -2,6 +2,8 @@
 
 ## Status
 
+![WIP](https://user-images.githubusercontent.com/97810962/229850607-7e36ea67-fe25-4844-924f-c421159b6a0d.gif)
+
 Still in development
 
 ## Intro

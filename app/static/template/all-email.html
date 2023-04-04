@@ -1,14 +1,4 @@
-<html>
-  <head>
-    <title>Attachments</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
-  </head>
-  <body>
-    <section>
-      <h2>Everything</h2>
-      {{ range .GroupedByDate }}
-      <h3>{{ .Date }}</h3>
-      <div class="email-list">
+ <div class="email-list">
         {{ range .Emails }}
         <div class="email-list__item">
           <a
@@ -20,10 +10,7 @@
           </a>
           <span>{{ truncate .Subject 50 }}</span><br /><br />
           <small>{{ .Filename }}</small><br />
+          <small>{{ .Received | prettydate }}</small>
         </div>
         {{ end }}
       </div>
-      {{ end }}
-    </section>
-  </body>
-</html>

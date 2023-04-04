@@ -3,6 +3,8 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 70rem;
+  margin: 0 auto;
 }
 
 section h2 {
@@ -10,6 +12,17 @@ section h2 {
   font-weight: 600;
   margin: 2rem;
 }
+
+section h3 {
+  border-bottom: 0.2rem solid #aaa;
+  color: #aaa;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 2rem;
+  padding-bottom: 0.5rem;
+  width: 100%;
+}
+
 .email-list {
   display: grid;
   grid-template-columns: 20rem 20rem 20rem;
