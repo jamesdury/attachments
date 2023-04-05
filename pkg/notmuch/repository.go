@@ -2,8 +2,6 @@ package email
 
 import (
 	"bufio"
-	"encoding/base64"
-	"io/ioutil"
 
 	//"net/http"
 	"os"
@@ -91,14 +89,9 @@ func (r *repository) Query(query string) (*[]Email, error) {
 		if err == nil {
 			for _, a := range email.Attachments {
 
-				bytes, err := ioutil.ReadAll(a.Data)
-				if err != nil {
-					panic(err)
-				}
-
 				// TODO Determine the content type of the image file
 				// mimeType := http.DetectContentType(bytes)
-				b64 := base64.StdEncoding.EncodeToString(bytes)
+				//b64 := base64.StdEncoding.EncodeToString(bytes)
 
 				/*
 				 * TODO write a check somewhere to check filetypes are match
@@ -110,9 +103,9 @@ func (r *repository) Query(query string) (*[]Email, error) {
 					Filename:    a.Filename,
 					From:        msg.Header("From"),
 					Received:    msg.Date(),
-					Size:        Filesize(b64),
-					Subject:     email.Subject,
-					ThreadId:    msg.ThreadID(),
+					//Size:        Filesize(b64),
+					Subject:  email.Subject,
+					ThreadId: msg.ThreadID(),
 				}
 
 				emails = append(emails, e)

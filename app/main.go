@@ -32,6 +32,7 @@ func main() {
 	engine.AddFunc("gravatar", TemplateFunctionGravatar)
 	engine.AddFunc("prettydate", TemplateFunctionPrettyDate)
 	engine.AddFunc("bytesize", TemplateFunctionBytesize)
+	engine.AddFunc("escape", TemplateFunctionEscape)
 
 	app := fiber.New(fiber.Config{
 		Views: engine,

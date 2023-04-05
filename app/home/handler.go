@@ -2,6 +2,7 @@ package home
 
 import (
 	"fmt"
+	"net/url"
 	"sort"
 	"strings"
 
@@ -91,5 +92,40 @@ func GetAttachments(notmuch email.Service) fiber.Handler {
 			"Top":           getTopContacts(*emails),
 			"GroupedByDate": groupByDate(*emails),
 		})
+	}
+}
+
+func GetMedia(notmuch email.Service) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		threadid := c.Params("threadid")
+		filename := c.Params("filename")
+
+		q := strings.Builder{}
+		path, _ := url.PathUnescape(filename)
+		// Can just search with "attachment:<filename>" but the search is
+		// unreliable via notmuch (if the name contains spaces), so better to
+		// use the thread source anyway
+		q.WriteString(fmt.Sprintf("thread:%s", threadid))
+
+		thread, err := notmuch.Query(q.String())
+		if err != nil {
+			return c.Render("static/template/error", fiber.Map{
+				"Error": err.Error(),
+			})
+		}
+
+		var image email.Email
+		for _, m := range *thread {
+			if m.Filename == path {
+				image = m
+				break
+			}
+		}
+
+		c.Status(fiber.StatusOK)
+		c.Set(fiber.HeaderContentType, image.ContentType)
+		c.SendStream(image.Data)
+
+		return nil
 	}
 }

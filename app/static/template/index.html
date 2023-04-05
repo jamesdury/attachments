@@ -14,12 +14,14 @@
         <div class="email-list__item">
           <a
             class="email-list__item-link"
-            href="/{{ .ThreadId }}/{{ .Filename }}"
-          >
+            href="/{{ .ThreadId }}/{{ .Filename | escape }}"
+            {{ if (eq .ContentType "image/jpeg") }}
+            style="background-size: cover; background-image: url(/{{ .ThreadId }}/{{ .Filename | escape }});"
+            {{ end }}
+            >
             <span class="fiv-sqo fiv-icon-{{ .ContentType | filetype }}"></span>
             &nbsp;
           </a>
-          <small>{{ .From | contact }}</small><br/>
           <span>{{ truncate .Subject 50 }}</span><br /><br />
           <small>{{ .Filename }} {{ .Size | bytesize }}</small>
         </div>

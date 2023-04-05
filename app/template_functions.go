@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
+	"net/url"
 	"regexp"
 	"strings"
 	"time"
@@ -76,4 +77,8 @@ func TemplateFunctionPrettyDate(t time.Time) string {
 func TemplateFunctionBytesize(b int) string {
 	bytes := bytesize.New(float64(b))
 	return fmt.Sprintf("%s", bytes)
+}
+
+func TemplateFunctionEscape(s string) string {
+	return url.PathEscape(s)
 }
