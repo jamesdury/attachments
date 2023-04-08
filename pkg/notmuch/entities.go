@@ -18,3 +18,8 @@ type Email struct {
 	ThreadId    string
 	To          string
 }
+
+type DateEmail struct {
+	Date   string
+	Emails []Email
+}
