@@ -28,8 +28,8 @@ func GetAttachments(notmuch email.Service) fiber.Handler {
 		return c.Render("static/template/index", fiber.Map{
 			"Title":         "Attachments",
 			"Emails":        emails,
-			"Top":           notmuch.GetTopContacts(*emails),
-			"GroupedByDate": notmuch.GroupByDate(*emails),
+			"Top":           email.GetTopContacts(*emails),
+			"GroupedByDate": email.GroupByDate(*emails),
 		})
 	}
 }
