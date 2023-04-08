@@ -22,8 +22,8 @@
             <span class="fiv-sqo fiv-icon-{{ .ContentType | filetype }}"></span>
             &nbsp;
           </a>
-          <span>{{ truncate .Subject 50 }}</span><br /><br />
-          <small>{{ .Filename }} {{ .Size | bytesize }}</small>
+          <span>{{ .Subject }}</span><br /><br />
+          <small>{{ truncate .Filename 50 }} {{ .Size | bytesize }}</small>
         </div>
         {{ end }}
       </div>
