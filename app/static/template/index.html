@@ -23,7 +23,8 @@
             &nbsp;
           </a>
           <span>{{ .Subject }}</span><br /><br />
-          <small>{{ truncate .Filename 50 }} {{ .Size | bytesize }}</small>
+          <small>{{ truncate .Filename 50 }}</small><br/>
+          <small>{{ .Size | bytesize }}</small>
         </div>
         {{ end }}
       </div>

@@ -60,3 +60,34 @@ func GetTopContacts(emails []Email) []Email {
 
 	return newEmails
 }
+
+// https://stackoverflow.com/a/56141678
+func filesize(s string) int {
+	l := len(s)
+
+	// count how many trailing '=' there are (if any)
+	eq := 0
+	if l >= 2 {
+		if s[l-1] == '=' {
+			eq++
+		}
+		if s[l-2] == '=' {
+			eq++
+		}
+
+		l -= eq
+	}
+
+	// basically:
+	//
+	// eq == 0 :    bits-wasted = 0
+	// eq == 1 :    bits-wasted = 2
+	// eq == 2 :    bits-wasted = 4
+
+	// each base64 character = 6 bits
+
+	// so orig length ==  (l*6 - eq*2) / 8
+
+	return (l*3 - eq) / 4
+
+}

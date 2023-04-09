@@ -8,5 +8,4 @@ import (
 func Router(app fiber.Router, service email.Service) {
 	app.Get("/:threadid/:filename", GetMedia(service))
 	app.Get("/", GetAttachments(service))
-
 }

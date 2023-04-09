@@ -2,6 +2,10 @@ package email
 
 import (
 	"bufio"
+	"bytes"
+	"encoding/base64"
+	"fmt"
+	"io"
 
 	//"net/http"
 	"os"
@@ -40,37 +44,6 @@ func readEmail(name string) (parsemail.Email, error) {
 	return email, nil
 }
 
-// https://stackoverflow.com/a/56141678
-func Filesize(s string) int {
-	l := len(s)
-
-	// count how many trailing '=' there are (if any)
-	eq := 0
-	if l >= 2 {
-		if s[l-1] == '=' {
-			eq++
-		}
-		if s[l-2] == '=' {
-			eq++
-		}
-
-		l -= eq
-	}
-
-	// basically:
-	//
-	// eq == 0 :    bits-wasted = 0
-	// eq == 1 :    bits-wasted = 2
-	// eq == 2 :    bits-wasted = 4
-
-	// each base64 character = 6 bits
-
-	// so orig length ==  (l*6 - eq*2) / 8
-
-	return (l*3 - eq) / 4
-
-}
-
 // TODO tidy this function up
 func (r *repository) Query(query string) (*[]Email, error) {
 	q := r.connection.NewQuery(query)
@@ -89,23 +62,28 @@ func (r *repository) Query(query string) (*[]Email, error) {
 		if err == nil {
 			for _, a := range email.Attachments {
 
-				// TODO Determine the content type of the image file
-				// mimeType := http.DetectContentType(bytes)
-				//b64 := base64.StdEncoding.EncodeToString(bytes)
+				var bodyBytes []byte
+				bodyBytes, err = io.ReadAll(a.Data)
+				if err != nil {
+					fmt.Printf("error: %v", err)
+				}
+				a.Data = io.NopCloser(bytes.NewBuffer(bodyBytes))
+				b64 := base64.StdEncoding.EncodeToString(bodyBytes)
 
-				/*
-				 * TODO write a check somewhere to check filetypes are match
-				 * a.ContentType === http.DetectContentType
-				 */
+				// TODO Determine the content type of the image file
+				// mimeType := http.DetectContentType(bodyBytes)
+				// And if it matches what the email is saying
+				// a.ContentType === http.DetectContentType
+
 				e := Email{
 					ContentType: a.ContentType,
 					Data:        a.Data,
 					Filename:    a.Filename,
 					From:        msg.Header("From"),
 					Received:    msg.Date(),
-					//Size:        Filesize(b64),
-					Subject:  email.Subject,
-					ThreadId: msg.ThreadID(),
+					Size:        filesize(b64),
+					Subject:     email.Subject,
+					ThreadId:    msg.ThreadID(),
 				}
 
 				emails = append(emails, e)
