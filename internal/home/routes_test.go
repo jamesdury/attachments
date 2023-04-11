@@ -66,7 +66,6 @@ func TestHomeRoute(t *testing.T) {
 	engine.AddFunc("prettydate", MockEngineFuncDate)
 	engine.AddFunc("truncate", MockEngineFuncTruncate)
 
-	engine.Debug(true)
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
