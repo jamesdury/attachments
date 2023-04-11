@@ -82,3 +82,7 @@ func Bytesize(b int) string {
 func Escape(s string) string {
 	return url.PathEscape(s)
 }
+
+func Hyponate(s string) string {
+    return strings.Replace(s, " ", "-", -1)
+}

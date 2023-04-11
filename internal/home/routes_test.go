@@ -63,6 +63,7 @@ func TestHomeRoute(t *testing.T) {
 	engine.AddFunc("escape", MockEngineFuncString)
 	engine.AddFunc("filetype", MockEngineFuncString)
 	engine.AddFunc("gravatar", MockEngineFuncString)
+	engine.AddFunc("hyponate", MockEngineFuncString)
 	engine.AddFunc("prettydate", MockEngineFuncDate)
 	engine.AddFunc("truncate", MockEngineFuncTruncate)
 

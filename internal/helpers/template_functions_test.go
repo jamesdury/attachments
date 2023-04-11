@@ -39,3 +39,9 @@ func TestPrettyDate(t *testing.T) {
 
 	assert.Equal(t, "Jan 04 2023", PrettyDate(d))
 }
+
+func TestHyponate(t *testing.T) {
+	const s = "string with spaces"
+	const expected = "string-with-spaces"
+	assert.Equal(t, expected, Hyponate(s))
+}

@@ -11,6 +11,7 @@ section {
   margin: 0 auto;
   padding: 1.5rem;
 }
+
 section h2 {
   font-family: Serif;
   font-size: 4rem;
@@ -21,52 +22,19 @@ section h2 {
   width: 100%;
 }
 
-// TODO turn these into mixins
-@media (min-width: 768px) and (max-width: 1024px) {
-  .email-list {
-    display: grid;
-    grid-gap: 5rem;
-    grid-template-columns: 18rem 18rem 18rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  section {
-    margin-top: 5rem;
-    padding-top: 10rem;
-    width: 90rem;
-  }
-
-  section h2 {
-    margin-bottom: 5rem;
-  }
-  .email-list {
-    display: grid;
-    grid-gap: 5rem;
-    grid-template-columns: 18rem 18rem 18rem 18rem;
-  }
-}
-
-@media (min-width: 1400px) {
-  section {
-    margin-top: 5rem;
-    padding-top: 10rem;
-    padding: 5rem;
-    width: 130rem;
-  }
-  .email-list {
-    grid-template-columns: 20rem 20rem 20rem 20rem 20rem;
-  }
-}
-
 section h3 {
   border-bottom: 0.2rem solid #ddd;
-  color: #aaa;
+  color: black;
   font-size: 2rem;
   font-weight: normal;
   margin: 2rem;
   padding-bottom: 0.5rem;
   width: 100%;
+}
+
+section h3 a {
+  color: #aaa;
+  display: none;
 }
 
 .email-list__item {
@@ -88,4 +56,51 @@ section h3 {
   height: 180px;
   font-size: 5rem;
   justify-content: center;
+}
+
+// TODO turn these into mixins
+@media (min-width: 768px) and (max-width: 1024px) {
+  .email-list {
+    display: grid;
+    grid-gap: 5rem;
+    grid-template-columns: 18rem 18rem 18rem;
+  }
+  section h3 a {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    margin-top: 5rem;
+    padding-top: 10rem;
+    width: 90rem;
+  }
+
+  section h2 {
+    margin-bottom: 5rem;
+  }
+  .email-list {
+    display: grid;
+    grid-gap: 5rem;
+    grid-template-columns: 18rem 18rem 18rem 18rem;
+  }
+  section h3 a {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 1400px) {
+  section {
+    margin-top: 5rem;
+    padding-top: 10rem;
+    padding: 5rem;
+    width: 130rem;
+  }
+  .email-list {
+    grid-template-columns: 20rem 20rem 20rem 20rem 20rem;
+  }
+  section h3 a {
+    display: inline-block;
+  }
 }

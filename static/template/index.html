@@ -7,7 +7,7 @@
     <section>
       <h2>Everything</h2>
       {{ range .GroupedByDate }}
-      <h3>{{ .Date }}</h3>
+      <h3 id="{{ .Date | hyponate }}"><a href="#{{ .Date | hyponate }}">#</a>&nbsp;{{ .Date }}</h3>
       <div class="email-list">
         {{ range .Emails }}
         <div class="email-list__item">

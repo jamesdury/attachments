@@ -25,6 +25,7 @@ func Setup(
 	engine.AddFunc("prettydate", helpers.PrettyDate)
 	engine.AddFunc("bytesize", helpers.Bytesize)
 	engine.AddFunc("escape", helpers.Escape)
+	engine.AddFunc("hyponate", helpers.Hyponate)
 
 	app := fiber.New(fiber.Config{
 		Views: engine,
