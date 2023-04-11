@@ -1,4 +1,4 @@
-package app
+package helpers
 
 import (
 	"crypto/md5"
@@ -12,7 +12,7 @@ import (
 	bytesize "github.com/inhies/go-bytesize"
 )
 
-func TemplateFunctionFileType(s string) string {
+func FileType(s string) string {
 	m := map[string]string{
 		"application/ics":              "ics",
 		"application/msword":           "docx",
@@ -33,11 +33,11 @@ func TemplateFunctionFileType(s string) string {
 	return value
 }
 
-func TemplateFunctionTruncate(s string, l int) string {
+func Truncate(s string, l int) string {
 	return fmt.Sprintf("%.*s", l, s)
 }
 
-func TemplateFunctionContact(s string) string {
+func Contact(s string) string {
 	re := regexp.MustCompile(`(.*?)\ <`)
 
 	m := re.FindStringSubmatch(s)
@@ -49,7 +49,7 @@ func TemplateFunctionContact(s string) string {
 	return strings.Trim(m[1], "\"")
 }
 
-func TemplateFunctionEmail(s string) string {
+func Email(s string) string {
 	re := regexp.MustCompile(`<(.*)>`)
 
 	m := re.FindStringSubmatch(s)
@@ -60,7 +60,7 @@ func TemplateFunctionEmail(s string) string {
 	return m[1]
 }
 
-func TemplateFunctionGravatar(s string) string {
+func Gravatar(s string) string {
 	email := strings.TrimSpace(s)
 	email = strings.ToLower(email)
 
@@ -70,15 +70,15 @@ func TemplateFunctionGravatar(s string) string {
 	return fmt.Sprintf("https://www.gravatar.com/avatar/%s.jpg", v)
 }
 
-func TemplateFunctionPrettyDate(t time.Time) string {
+func PrettyDate(t time.Time) string {
 	return t.Format("Jan 02 2006")
 }
 
-func TemplateFunctionBytesize(b int) string {
+func Bytesize(b int) string {
 	bytes := bytesize.New(float64(b))
 	return fmt.Sprintf("%s", bytes)
 }
 
-func TemplateFunctionEscape(s string) string {
+func Escape(s string) string {
 	return url.PathEscape(s)
 }

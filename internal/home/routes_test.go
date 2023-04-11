@@ -3,7 +3,6 @@ package home
 import (
 	"io"
 	"net/http"
-	"os"
 	"strings"
 	"testing"
 	"time"
@@ -55,9 +54,8 @@ func MockEngineFuncString(s string) string {
 }
 
 func TestHomeRoute(t *testing.T) {
-	currentWorkingDirectory, _ := os.Getwd()
 
-	engine := html.New(currentWorkingDirectory+"/../", ".html")
+	engine := html.New("../../", ".html") // ../../static/*
 	engine.AddFunc("bytesize", MockEngineFuncInt)
 	engine.AddFunc("contact", MockEngineFuncString)
 	engine.AddFunc("contact", MockEngineFuncString)

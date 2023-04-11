@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "icons": "cp -r node_modules/file-icon-vectors/dist/icons app/static/dist/",
-    "build": "sass web/scss/index.scss > app/static/dist/styles.css"
+    "icons": "cp -r node_modules/file-icon-vectors/dist/icons static/dist/",
+    "build": "sass web/scss/index.scss > static/dist/styles.css"
   },
   "keywords": [],
   "author": "",

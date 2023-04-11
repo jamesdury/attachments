@@ -1,13 +1,22 @@
 package main
 
 import (
+	"embed"
 	"log"
 	"os"
 
 	notmuch "github.com/zenhack/go.notmuch"
 
-	app "github.com/jamesdury/attachments/app"
+	app "github.com/jamesdury/attachments/internal/server"
+	email "github.com/jamesdury/attachments/pkg/notmuch"
+	home "github.com/jamesdury/attachments/internal/home"
 )
+
+//go:embed static/template/*
+var embedDirTemplate embed.FS
+
+//go:embed static/dist/*
+var embedDirStatic embed.FS
 
 func main() {
 	// TODO take cli argument or read env var
@@ -21,9 +30,16 @@ func main() {
 		log.Fatal("Database unavailable")
 	}
 
-	attachments := app.Build(db)
+	app := app.Setup(
+		embedDirTemplate,
+		embedDirStatic,
+	)
+
+	emailService := email.NewService(email.NewRepo(db))
+
+	home.Router(app.Group("/"), emailService)
 
 	defer db.Close()
 
-	log.Fatal(attachments.Listen(":8080"))
+	log.Fatal(app.Listen(":8080"))
 }

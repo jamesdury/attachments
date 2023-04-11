@@ -1,4 +1,4 @@
 email.txt
 *.css
-app/static/dist/icons
+static/dist/icons
 build
