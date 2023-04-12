@@ -15,6 +15,7 @@ func findDateEmail(output map[int]DateEmail, d string) (DateEmail, int) {
 	return DateEmail{Date: d}, -1
 }
 
+// GroupByDate returns a map emails grouped by the date the were received
 func GroupByDate(emails []Email) map[int]DateEmail {
 	output := make(map[int]DateEmail)
 
@@ -36,7 +37,8 @@ func GroupByDate(emails []Email) map[int]DateEmail {
 	return output
 }
 
-// get the top 5 contacts in an email array
+// GetTopContacts returns a map of the top five contacts (email.From) in an
+// email array
 func GetTopContacts(emails []Email) []Email {
 	output := make(map[string][]Email)
 	// take the keys and put them in a key/value [email.From]: [email..]

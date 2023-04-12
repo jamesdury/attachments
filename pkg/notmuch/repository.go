@@ -61,7 +61,6 @@ func (r *repository) Query(query string) (*[]Email, error) {
 		email, err := readEmail(msg.Filename())
 		if err == nil {
 			for _, a := range email.Attachments {
-
 				var bodyBytes []byte
 				bodyBytes, err = io.ReadAll(a.Data)
 				if err != nil {
@@ -74,7 +73,6 @@ func (r *repository) Query(query string) (*[]Email, error) {
 				// mimeType := http.DetectContentType(bodyBytes)
 				// And if it matches what the email is saying
 				// a.ContentType === http.DetectContentType
-
 				e := Email{
 					ContentType: a.ContentType,
 					Data:        a.Data,

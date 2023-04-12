@@ -1,3 +1,4 @@
+// Package email is an interface to communicate with the notmuch server
 package email
 
 type Service interface {
@@ -14,8 +15,8 @@ func NewService(r Repository) Service {
 	}
 }
 
-
-
+// Query returns a reference to an array of emails based on the notmuch query
+// provided
 func (s *service) Query(query string) (*[]Email, error) {
 	return s.repository.Query(query)
 }
