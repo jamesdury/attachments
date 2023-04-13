@@ -84,5 +84,22 @@ func Escape(s string) string {
 }
 
 func Hyponate(s string) string {
-    return strings.Replace(s, " ", "-", -1)
+	return strings.Replace(s, " ", "-", -1)
+}
+
+func IsImage(s string) bool {
+	c := []string{
+		"image/gif",
+		"image/jpeg",
+		"image/png",
+		"image/webm",
+	}
+	for _, v := range c {
+		if v == s {
+			return true
+		}
+	}
+
+	return false
+
 }

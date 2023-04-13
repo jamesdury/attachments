@@ -14,7 +14,7 @@
           <a
             class="email-list__item-link"
             href="/{{ .ThreadId }}/{{ .Filename | escape }}"
-            {{ if (eq .ContentType "image/jpeg") }}
+            {{ if (isimage .ContentType) }}
             style="background-size: cover; background-image: url(/{{ .ThreadId }}/{{ .Filename | escape }});"
             {{ end }}
             >

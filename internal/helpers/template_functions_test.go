@@ -45,3 +45,13 @@ func TestHyponate(t *testing.T) {
 	const expected = "string-with-spaces"
 	assert.Equal(t, expected, Hyponate(s))
 }
+
+func TestIsImage(t *testing.T) {
+	assert.Equal(t, true, IsImage("image/gif"))
+	assert.Equal(t, true, IsImage("image/jpeg"))
+	assert.Equal(t, true, IsImage("image/png"))
+	assert.Equal(t, true, IsImage("image/webm"))
+	assert.Equal(t, false, IsImage("application/ics"))
+	assert.Equal(t, false, IsImage("text/calendar"))
+	assert.Equal(t, false, IsImage(""))
+}

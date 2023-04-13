@@ -53,11 +53,13 @@ func MockEngineFuncString(s string) string {
 	return ""
 }
 
-func TestHomeRoute(t *testing.T) {
+func MockEngineFuncBool(s string) bool {
+	return true
+}
 
+func TestHomeRoute(t *testing.T) {
 	engine := html.New("../../", ".html") // ../../static/*
 	engine.AddFunc("bytesize", MockEngineFuncInt)
-	engine.AddFunc("contact", MockEngineFuncString)
 	engine.AddFunc("contact", MockEngineFuncString)
 	engine.AddFunc("email", MockEngineFuncString)
 	engine.AddFunc("escape", MockEngineFuncString)
@@ -66,6 +68,7 @@ func TestHomeRoute(t *testing.T) {
 	engine.AddFunc("hyponate", MockEngineFuncString)
 	engine.AddFunc("prettydate", MockEngineFuncDate)
 	engine.AddFunc("truncate", MockEngineFuncTruncate)
+	engine.AddFunc("isimage", MockEngineFuncBool)
 
 	app := fiber.New(fiber.Config{
 		Views: engine,

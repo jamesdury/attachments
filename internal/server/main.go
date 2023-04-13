@@ -11,11 +11,10 @@ import (
 	helpers "github.com/jamesdury/attachments/internal/helpers"
 )
 
-
 func Setup(
 	dirTemplate embed.FS,
 	dirStatic embed.FS,
-) *fiber.App  {
+) *fiber.App {
 	engine := html.NewFileSystem(http.FS(dirTemplate), ".html")
 	engine.AddFunc("filetype", helpers.FileType)
 	engine.AddFunc("truncate", helpers.Truncate)
@@ -26,6 +25,7 @@ func Setup(
 	engine.AddFunc("bytesize", helpers.Bytesize)
 	engine.AddFunc("escape", helpers.Escape)
 	engine.AddFunc("hyponate", helpers.Hyponate)
+	engine.AddFunc("isimage", helpers.IsImage)
 
 	app := fiber.New(fiber.Config{
 		Views: engine,
