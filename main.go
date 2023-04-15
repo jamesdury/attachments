@@ -2,14 +2,14 @@ package main
 
 import (
 	"embed"
+	"flag"
 	"log"
-	"os"
 
 	notmuch "github.com/zenhack/go.notmuch"
 
+	home "github.com/jamesdury/attachments/internal/home"
 	app "github.com/jamesdury/attachments/internal/server"
 	email "github.com/jamesdury/attachments/pkg/notmuch"
-	home "github.com/jamesdury/attachments/internal/home"
 )
 
 //go:embed static/template/*
@@ -19,13 +19,14 @@ var embedDirTemplate embed.FS
 var embedDirStatic embed.FS
 
 func main() {
-	// TODO take cli argument or read env var
-	dirname, err := os.UserHomeDir()
-	if err != nil {
-		log.Fatal(err)
+	dbPath := flag.String("db", "", "Provide path to the notmuch database directory (contains the .notmuch directory)")
+	flag.Parse()
+
+	if *dbPath == "" {
+		log.Fatal("Database path not supplied")
 	}
 
-	db, err := notmuch.Open(dirname+"/Mail", notmuch.DBReadOnly)
+	db, err := notmuch.Open(*dbPath, notmuch.DBReadOnly)
 	if err != nil {
 		log.Fatal("Database unavailable")
 	}
