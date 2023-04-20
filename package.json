@@ -5,13 +5,17 @@
   "main": "index.js",
   "scripts": {
     "icons": "cp -r node_modules/file-icon-vectors/dist/icons static/dist/",
-    "build": "sass static/web/scss/index.scss > static/dist/styles.css"
+    "sass": "sass static/web/scss/index.scss > static/temp.css",
+    "css": "postcss --use autoprefixer cssnano -o static/dist/styles.css static/temp.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.0",
     "file-icon-vectors": "^1.0.0",
+    "postcss-cli": "^10.1.0",
     "sass": "^1.60.0"
   }
 }

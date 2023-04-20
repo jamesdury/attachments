@@ -4,7 +4,8 @@ default: test build
 
 build:
 	npm run icons
-	npm run build
+	npm run sass
+	npm run css
 	mkdir -p build
 	go build -o ./build/${BINARY_NAME} main.go
 
